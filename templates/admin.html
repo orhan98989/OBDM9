@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الإدارة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="login-body">
+<div class="admin-box">
+<h2>لوحة الإدارة</h2>
+
+<form method="POST" action="/admin/add_room">
+<input name="room_name" placeholder="اسم غرفة جديدة">
+<button>إضافة غرفة</button>
+</form>
+
+<h3>الغرف</h3>
+{% for r in rooms %}
+<div class="card">🏠 {{ r.name }}</div>
+{% endfor %}
+
+<h3>الأعضاء</h3>
+{% for u in users %}
+<div class="card">
+{{ u.name }} | {{ u.gender }} | {{ u.age }}
+<a href="/admin/block_user/{{ u.name }}">حظر</a>
+</div>
+{% endfor %}
+
+<h3>المحظورون</h3>
+{% for b in blocked %}
+<div class="card">{{ b.name }} <a href="/admin/unblock_user/{{ b.id }}">فك الحظر</a></div>
+{% endfor %}
+
+<h3>آخر الرسائل</h3>
+{% for m in messages %}
+<div class="card">
+<b>{{ m.user_name }}</b> [{{ m.room }}]: {{ m.message|safe }}
+<a href="/admin/delete_message/{{ m.id }}">حذف</a>
+</div>
+{% endfor %}
+
+<a class="btnlink" href="/chat">رجوع</a>
+</div>
+</body>
+</html>

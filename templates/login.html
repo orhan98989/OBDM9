@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>دخول الشات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="login-body">
+<div class="login-box">
+<h2>شات العراق 100</h2>
+<p>موقع شات عربي للموبايل</p>
+<form method="POST" enctype="multipart/form-data">
+<label>اسمك</label>
+<input name="name" required placeholder="اكتب اسمك">
+<label>الحالة</label>
+<input name="status" placeholder="اكتب حالتك">
+<label>الجنس</label>
+<select name="gender"><option>ذكر</option><option>أنثى</option></select>
+<label>العمر</label>
+<select name="age">{% for i in range(18,61) %}<option>{{i}}</option>{% endfor %}</select>
+<label>الغرفة</label>
+<select name="room">{% for r in rooms %}<option>{{ r.name }}</option>{% endfor %}</select>
+<label>الصورة الشخصية</label>
+<input type="file" name="avatar">
+<div class="checks">
+<label><input type="checkbox" name="allow_private" checked> السماح بالخاص</label>
+<label><input type="checkbox" name="allow_comments" checked> السماح بالتعليقات</label>
+</div>
+<button>دخول الشات</button>
+</form>
+<a class="link" href="#">سياسة الخصوصية</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+Copyright (c) 2026 Orhan Jawdat
+
+All Rights Reserved.
+
+This project was developed by Orhan Jawdat.
+
+This source code is provided for review and demonstration purposes only.
+
+No person or organization may copy, modify, redistribute, publish, sell, sublicense, or use this software commercially without prior written permission from the author.
+
+Unauthorized use of this software is strictly prohibited.
+
+Author: Orhan Jawdat
+Year: 2026

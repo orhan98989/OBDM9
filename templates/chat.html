@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الشات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="chat-body">
+
+<div id="sidebar" class="sidebar">
+<div class="sidebar-head">
+<img src="/static/uploads/{{ user.avatar }}" onerror="this.src='https://via.placeholder.com/70'">
+<h3>{{ user.name }}</h3>
+<p>{{ user.status }}</p>
+</div>
+<a onclick="toggleMenu();showTab('chat')">🏠 الشات العام</a>
+<a onclick="toggleMenu();showTab('rooms')">🏘️ الغرف</a>
+<a onclick="toggleMenu();showTab('users')">🟢 المتصلون</a>
+<a onclick="toggleMenu();showTab('private')">💬 الخاص</a>
+<a onclick="toggleMenu();showTab('settings')">⚙️ الإعدادات</a>
+<a href="/profile">👤 الملف الشخصي</a>
+<a href="/admin">🛡️ الإدارة</a>
+<a href="/logout">🚪 خروج</a>
+</div>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<div class="app">
+<header>
+<div>
+<b>غرفة {{ current_room }}</b>
+<small>أهلاً {{ user.name }} | <span id="onlineCount">0</span> متصل</small>
+</div>
+<img src="/static/uploads/{{ user.avatar }}" onerror="this.src='https://via.placeholder.com/40'">
+</header>
+
+<div class="tabs">
+<button onclick="showTab('chat')">العام</button>
+<button onclick="showTab('rooms')">الغرف</button>
+<button onclick="showTab('users')">الأعضاء</button>
+<button onclick="showTab('private')">الخاص</button>
+</div>
+
+<section id="chatTab" class="tab active">
+
+
+<div id="messages" class="messages">
+{% for msg in messages %}
+<div class="message"><b>{{ msg.user_name }}</b><br>{{ msg.message|safe }}</div>
+{% endfor %}
+</div>
+
+<div class="send">
+<input id="messageInput" placeholder="اكتب رسالة...">
+<label class="img-btn">📷<input type="file" id="chatImage" hidden onchange="uploadImage()"></label>
+<button onclick="sendMessage()">إرسال</button>
+</div>
+</section>
+
+<section id="roomsTab" class="tab">
+<h3>الغرف</h3>
+{% for r in rooms %}
+<a class="room-card" href="/change_room/{{ r.name }}">🏠 {{ r.name }}</a>
+{% endfor %}
+</section>
+
+<section id="usersTab" class="tab">
+<h3>المتصلون الآن</h3>
+<ul id="onlineUsers"></ul>
+<h3>كل الأعضاء</h3>
+<ul>
+{% for u in users %}
+<li>
+<img class="mini" src="/static/uploads/{{ u.avatar }}" onerror="this.src='https://via.placeholder.com/30'">
+{{ u.name }} - {{ u.gender }} - {{ u.age }}
+<button class="smallbtn" onclick="startPrivate('{{ u.name }}')">خاص</button>
+<button class="smallbtn danger" onclick="muteUser('{{ u.name }}')">كتم</button>
+</li>
+{% endfor %}
+</ul>
+</section>
+
+<section id="privateTab" class="tab">
+<label>إلى المستخدم</label>
+<select id="privateReceiver">
+{% for u in users %}
+<option>{{ u.name }}</option>
+{% endfor %}
+</select>
+<input id="privateInput" placeholder="اكتب رسالة خاصة">
+<button onclick="sendPrivate()">إرسال خاص</button>
+<div id="privateMessages" class="messages small"></div>
+</section>
+
+<section id="settingsTab" class="tab">
+<h3>إعدادات الحساب</h3>
+<div class="card">الاسم: {{ user.name }}</div>
+<div class="card">الحالة: {{ user.status }}</div>
+<div class="card">السماح بالخاص: {{ "نعم" if user.allow_private else "لا" }}</div>
+<div class="card">السماح بالتعليقات: {{ "نعم" if user.allow_comments else "لا" }}</div>
+</section>
+
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

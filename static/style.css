@@ -1,0 +1,46 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial;background:#eef2f7;color:#111}
+.login-body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a,#2563eb);padding:15px}
+.login-box,.admin-box{width:100%;max-width:430px;background:white;border-radius:22px;padding:22px;box-shadow:0 15px 40px #0005}
+.admin-box{max-width:760px}
+h2{text-align:center;color:#1d4ed8;margin:5px 0 10px}
+p{text-align:center;color:#555}
+label{display:block;margin-top:12px;font-weight:bold}
+input,select{width:100%;padding:13px;margin-top:6px;border:1px solid #ddd;border-radius:13px;font-size:16px}
+button,.btnlink{display:block;width:100%;padding:14px;margin-top:15px;background:#2563eb;color:white;border:0;border-radius:13px;text-align:center;text-decoration:none;font-size:16px;font-weight:bold}
+.link{display:block;text-align:center;margin-top:15px;color:#2563eb}
+.checks label{font-weight:normal}
+.app{max-width:520px;margin:auto;height:100vh;background:#f8fafc;display:flex;flex-direction:column}
+header{background:#1d4ed8;color:white;padding:12px 55px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+header small{display:block;color:#dbeafe;margin-top:4px}
+header img{width:42px;height:42px;border-radius:50%;object-fit:cover;background:white}
+.tabs{display:flex;gap:4px;background:white;padding:6px;border-bottom:1px solid #ddd;overflow-x:auto}
+.tabs button,.tabs a{min-width:70px;margin:0;padding:10px;border-radius:10px;background:#e5edff;color:#1d4ed8;text-align:center;text-decoration:none;border:0;font-weight:bold}
+.tab{display:none;flex:1;overflow:auto;padding:10px}
+.tab.active{display:block}
+.messages{height:calc(100vh - 185px);overflow-y:auto;padding-bottom:75px}
+.messages.small{height:260px;padding-bottom:10px}
+.message{background:white;margin:8px 0;padding:10px 13px;border-radius:14px;box-shadow:0 2px 8px #0001;word-wrap:break-word}
+.message b{color:#1d4ed8}
+.private{background:#fff7ed}
+.system{text-align:center;color:#666;margin:8px;font-size:13px}
+.send{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;display:flex;gap:6px;padding:9px;background:white;border-top:1px solid #ddd}
+.send input{margin:0;flex:1}
+.send button{width:82px;margin:0;padding:12px}
+.img-btn{width:44px;margin:0;background:#e5edff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+ul{list-style:none;padding:0}
+li,.card,.room-card{background:white;margin:7px 0;padding:10px;border-radius:12px;box-shadow:0 2px 6px #0001;display:block;text-decoration:none;color:#111}
+.card a{float:left;color:#dc2626;margin-right:10px}
+.avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;display:block;margin:10px auto}
+.mini{width:30px;height:30px;border-radius:50%;vertical-align:middle;margin-left:6px}
+.smallbtn{display:inline-block;width:auto;margin:3px;padding:6px 10px;font-size:12px}
+.danger{background:#dc2626}
+.chat-img{max-width:180px;border-radius:12px;display:block;margin-top:5px}
+.sidebar{position:fixed;right:-285px;top:0;width:275px;height:100%;background:#111827;color:white;z-index:999;transition:.25s;overflow-y:auto}
+.sidebar.open{right:0}
+.sidebar-head{padding:20px;background:#1d4ed8;text-align:center}
+.sidebar-head img{width:70px;height:70px;border-radius:50%;object-fit:cover;background:white}
+.sidebar-head h3,.sidebar-head p{margin:7px 0;color:white}
+.sidebar a{display:block;color:white;text-decoration:none;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer}
+.sidebar a:hover{background:#2563eb}
+.menu-btn{position:fixed;top:10px;right:10px;z-index:1000;width:44px;height:44px;border:none;border-radius:12px;background:#0f172a;color:white;font-size:22px;margin:0;padding:0}
