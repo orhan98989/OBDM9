@@ -44,3 +44,22 @@ li,.card,.room-card{background:white;margin:7px 0;padding:10px;border-radius:12p
 .sidebar a{display:block;color:white;text-decoration:none;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer}
 .sidebar a:hover{background:#2563eb}
 .menu-btn{position:fixed;top:10px;right:10px;z-index:1000;width:44px;height:44px;border:none;border-radius:12px;background:#0f172a;color:white;font-size:22px;margin:0;padding:0}
+
+.message{
+display:flex;
+gap:10px;
+align-items:flex-start;
+}
+
+.msg-avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+flex-shrink:0;
+background:#ddd;
+}
+
+.msg-content{
+flex:1;
+}

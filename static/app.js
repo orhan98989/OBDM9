@@ -9,7 +9,12 @@ socket.on("message", function(data){
     if(mutedUsers.includes(data.name)) return;
     const div = document.createElement("div");
     div.className = data.name === "النظام" ? "system" : "message";
-    div.innerHTML = data.name === "النظام" ? data.message : "<b>"+data.name+"</b><br>"+data.message;
+    if(data.name === "النظام"){
+        div.innerHTML = data.message;
+    } else {
+        const avatar = data.avatar || "default.png";
+        div.innerHTML = '<img class="msg-avatar" src="/static/uploads/' + avatar + '" onerror="this.src=\'https://via.placeholder.com/40\'"><div class="msg-content"><b>' + data.name + '</b><br>' + data.message + '</div>';
+    }
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     notifyUser(data.name + ": " + stripHtml(data.message));

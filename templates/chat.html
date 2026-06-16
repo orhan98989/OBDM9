@@ -48,7 +48,13 @@
 
 <div id="messages" class="messages">
 {% for msg in messages %}
-<div class="message"><b>{{ msg.user_name }}</b><br>{{ msg.message|safe }}</div>
+<div class="message">
+<img class="msg-avatar" src="/static/uploads/{{ user.avatar }}" onerror="this.src='https://via.placeholder.com/40'">
+<div class="msg-content">
+<b>{{ msg.user_name }}</b><br>
+{{ msg.message|safe }}
+</div>
+</div>
 {% endfor %}
 </div>
 

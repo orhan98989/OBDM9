@@ -27,6 +27,7 @@ class BlockedUser(db.Model):
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(80), nullable=False)
+    avatar = db.Column(db.String(200), default="default.png")
     message = db.Column(db.Text, nullable=False)
     room = db.Column(db.String(80), default="العامة")
     is_image = db.Column(db.Boolean, default=False)
