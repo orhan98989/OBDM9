@@ -51,7 +51,10 @@
 <div class="message">
 <img class="msg-avatar" src="/static/uploads/{{ user.avatar }}" onerror="this.src='https://via.placeholder.com/40'">
 <div class="msg-content">
-<b>{{ msg.user_name }}</b><br>
+<div class="msg-header">
+<b>{{ msg.user_name }}</b>
+<span class="msg-time">{{ msg.created_at.strftime("%Y-%m-%d %H:%M") }}</span>
+</div>
 {{ msg.message|safe }}
 </div>
 </div>

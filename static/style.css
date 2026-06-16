@@ -63,3 +63,16 @@ background:#ddd;
 .msg-content{
 flex:1;
 }
+
+
+.msg-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:4px;
+}
+
+.msg-time{
+font-size:11px;
+color:#777;
+}

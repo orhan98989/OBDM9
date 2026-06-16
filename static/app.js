@@ -13,7 +13,15 @@ socket.on("message", function(data){
         div.innerHTML = data.message;
     } else {
         const avatar = data.avatar || "default.png";
-        div.innerHTML = '<img class="msg-avatar" src="/static/uploads/' + avatar + '" onerror="this.src=\'https://via.placeholder.com/40\'"><div class="msg-content"><b>' + data.name + '</b><br>' + data.message + '</div>';
+        const now = new Date();
+const time = now.toLocaleString();
+
+div.innerHTML =
+'<img class="msg-avatar" src="/static/uploads/' + avatar + '" onerror="this.src=\'https://via.placeholder.com/40\'">' +
+'<div class="msg-content">' +
+'<div class="msg-header"><b>' + data.name + '</b><span class="msg-time">' + time + '</span></div>' +
+data.message +
+'</div>';
     }
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
