@@ -138,22 +138,41 @@ def add_room():
 def upload_chat_image():
     if "user_id" not in session:
         return jsonify({"ok": False})
+
     file = request.files.get("image")
     if not file or not file.filename:
         return jsonify({"ok": False})
+
     filename = secure_filename(file.filename)
     path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
     file.save(path)
+
     url = "/static/uploads/" + filename
     name = session.get("name", "زائر")
     room = session.get("room", "العامة")
-    html = f'<img src="{url}" class="chat-img">'
+
     user = User.query.filter_by(name=name).first()
-avatar = user.avatar if user else "default.png"
-msg = Message(user_name=name, avatar=avatar, message=html, room=room, is_image=True)
+    avatar = user.avatar if user else "default.png"
+
+    html = f'<img src="{url}" class="chat-img">'
+
+    msg = Message(
+        user_name=name,
+        avatar=avatar,
+        message=html,
+        room=room,
+        is_image=True
+    )
+
     db.session.add(msg)
     db.session.commit()
-    socketio.emit("message", {"name": name, "avatar": avatar, "message": html}, room=room)
+
+    socketio.emit(
+        "message",
+        {"name": name, "avatar": avatar, "message": html},
+        room=room
+    )
+
     return jsonify({"ok": True, "url": url})
 
 @app.route("/logout")
@@ -188,16 +207,30 @@ def message(data):
     name = session.get("name", "زائر")
     room = session.get("room", "العامة")
     text = data.get("message", "").strip()
+
     if not text:
         return
+
     if BlockedUser.query.filter_by(name=name).first():
         return
+
     user = User.query.filter_by(name=name).first()
-avatar = user.avatar if user else "default.png"
-msg = Message(user_name=name, avatar=avatar, message=text, room=room)
+    avatar = user.avatar if user else "default.png"
+
+    msg = Message(
+        user_name=name,
+        avatar=avatar,
+        message=text,
+        room=room
+    )
+
     db.session.add(msg)
     db.session.commit()
-    send({"name": name, "avatar": avatar, "message": text}, room=room)
+
+    send(
+        {"name": name, "avatar": avatar, "message": text},
+        room=room
+    )
 
 @socketio.on("private_message")
 def private_message(data):
