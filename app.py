@@ -217,3 +217,7 @@ if __name__ == "__main__":
 PROJECT_AUTHOR = "Orhan Jawdat"
 PROJECT_VERSION = "1.0"
 
+
+PROJECT_AUTHOR = "Orhan Jawdat"
+PROJECT_VERSION = "1.0"
+
