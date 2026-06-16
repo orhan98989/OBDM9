@@ -46,7 +46,10 @@ socket.on("online_users", function(users){
 socket.on("private_message", function(data){
     const div = document.createElement("div");
     div.className = "message private";
-    div.innerHTML = "<b>خاص من " + data.sender + " إلى " + data.receiver + "</b><br>" + data.message;
+    const avatar = data.avatar || "default.png";
+    div.innerHTML =
+        '<img class="msg-avatar" src="/static/uploads/' + avatar + '" onerror="this.src=\'https://via.placeholder.com/40\'">' +
+        '<div class="msg-content"><b>خاص من ' + data.sender + ' إلى ' + data.receiver + '</b><br>' + data.message + '</div>';
     privateBox.appendChild(div);
     notifyUser("رسالة خاصة من " + data.sender);
 });

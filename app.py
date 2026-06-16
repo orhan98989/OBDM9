@@ -170,7 +170,7 @@ def connect():
     room_users = [u["name"] for u in online_users.values() if u["room"] == room]
     emit("online_users", room_users, room=room)
     emit("online_count", len(room_users), room=room)
-    send({"name": "النظام", "message": f"{name} دخل غرفة {room}"}, room=room)
+    send({"name": "النظام", "avatar": "default.png", "message": f"{name} دخل غرفة {room}"}, room=room)
 
 @socketio.on("disconnect")
 def disconnect():
@@ -181,7 +181,7 @@ def disconnect():
     room_users = [u["name"] for u in online_users.values() if u["room"] == room]
     emit("online_users", room_users, room=room)
     emit("online_count", len(room_users), room=room)
-    send({"name": "النظام", "message": f"{name} خرج من الشات"}, room=room)
+    send({"name": "النظام", "avatar": "default.png", "message": f"{name} خرج من الشات"}, room=room)
 
 @socketio.on("message")
 def message(data):
@@ -213,7 +213,9 @@ def private_message(data):
     pm = PrivateMessage(sender=sender, receiver=receiver, message=text)
     db.session.add(pm)
     db.session.commit()
-    emit("private_message", {"sender": sender, "receiver": receiver, "message": text}, broadcast=True)
+    sender_user = User.query.filter_by(name=sender).first()
+avatar = sender_user.avatar if sender_user else "default.png"
+emit("private_message", {"sender": sender, "receiver": receiver, "avatar": avatar, "message": text}, broadcast=True)
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5050, debug=False, allow_unsafe_werkzeug=True)
