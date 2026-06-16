@@ -237,18 +237,46 @@ def private_message(data):
     sender = session.get("name", "زائر")
     receiver = data.get("receiver")
     text = data.get("message", "").strip()
+
     if not receiver or not text:
         return
+
     target = User.query.filter_by(name=receiver).first()
+
     if target and not target.allow_private:
-        emit("private_message", {"sender": "النظام", "receiver": sender, "message": "هذا المستخدم لا يسمح بالخاص"})
+        emit(
+            "private_message",
+            {
+                "sender": "النظام",
+                "receiver": sender,
+                "avatar": "default.png",
+                "message": "هذا المستخدم لا يسمح بالخاص"
+            }
+        )
         return
-    pm = PrivateMessage(sender=sender, receiver=receiver, message=text)
+
+    pm = PrivateMessage(
+        sender=sender,
+        receiver=receiver,
+        message=text
+    )
+
     db.session.add(pm)
     db.session.commit()
+
     sender_user = User.query.filter_by(name=sender).first()
-avatar = sender_user.avatar if sender_user else "default.png"
-emit("private_message", {"sender": sender, "receiver": receiver, "avatar": avatar, "message": text}, broadcast=True)
+    avatar = sender_user.avatar if sender_user else "default.png"
+
+    emit(
+        "private_message",
+        {
+            "sender": sender,
+            "receiver": receiver,
+            "avatar": avatar,
+            "message": text
+        },
+        broadcast=True
+    )
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5050, debug=False, allow_unsafe_werkzeug=True)
